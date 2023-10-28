@@ -1,0 +1,21 @@
+services:
+  ibm-mq:
+    # platform: linux/x86_64
+    # platform: linux/amd64
+    container_name: ibm-mq-server
+    image: localhost:5001/ibm-mq:latest
+    ports:
+      - "1414:1414"
+      - "9443:9443"
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=QM1
+    hostname: mq-server
+    stdin_open: true
+    tty: true
+    restart: no
+    networks:
+      - ibm-mq-stack
+networks:
+  ibm-mq-stack:
+    driver: bridge
