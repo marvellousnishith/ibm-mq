@@ -2,7 +2,7 @@ services:
   ibm-mq:
     # platform: linux/x86_64
     # platform: linux/amd64
-    container_name: ibm-mq-server
+    container_name: ibm-mq-server-ct
     image: localhost:5001/ibm-mq:latest
     ports:
       - "1414:1414"
@@ -13,6 +13,14 @@ services:
     hostname: mq-server
     stdin_open: true
     tty: true
+    restart: no
+    networks:
+      - ibm-mq-stack
+  spring-app-ibm-mq:
+    container_name: spring-app-ibm-mq-ct
+    build: .
+    ports:
+      - "8080:8080"
     restart: no
     networks:
       - ibm-mq-stack
